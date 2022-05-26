@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PanelWizard" default="wizard" basedir=".">
+    <description>Builds the Panel Wizard.</description>
+	<target name="wizard">
+		<delete includeEmptyDirs="true" failonerror="false">
+		   <fileset dir="classes"/>
+		</delete>
+		<mkdir dir="classes"/>
+		<javac includeantruntime="false" srcdir="src"
+            destdir="classes"
+            classpath="lib/beans2nbm.jar;
+				lib/junit-4.8.1.jar"
+  			includes="org/netbeans/api/wizard/*.java
+					  org/netbeans/api/wizard/displayer/*.java
+					  org/netbeans/modules/wizard/*.java
+					  org/netbeans/spi/wizard/*.java"
+            source="1.6"
+            />
+	    <copy todir="classes/org/netbeans/api/wizard">
+          <fileset dir="src/org/netbeans/api/wizard">
+          	 <exclude name="**/*.java"/>
+          </fileset>
+	    </copy>
+
+		<copy todir="classes/org/netbeans/api/wizard/displayer">
+          <fileset dir="src/org/netbeans/api/wizard/displayer">
+          	 <exclude name="**/*.java"/>
+          </fileset>
+		</copy>
+		
+		<copy todir="classes/org/netbeans/modules/wizard">
+          <fileset dir="src/org/netbeans/modules/wizard">
+          	 <exclude name="**/*.java"/>
+          </fileset>
+	    </copy>
+		<copy todir="classes/org/netbeans/spi/wizard">
+          <fileset dir="src/org/netbeans/spi/wizard">
+          	 <exclude name="**/*.java"/>
+          </fileset>
+	    </copy>
+		
+		<jar destfile="wizard.jar"
+        basedir="classes"       				
+		update="true"
+  		includes="org/netbeans/api/wizard/*.*
+				org/netbeans/api/wizard/displayer/*.*
+				org/netbeans/modules/wizard/*.*
+				org/netbeans/spi/wizard/*.*">
+	    </jar>
+	 </target>
+</project>
